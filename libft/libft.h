@@ -5,6 +5,11 @@
 #include <unistd.h>
 
 
+#define INITIAL_ARG_CHECK(dest, src, n)	\
+	if (!dest || !src) return NULL;		\
+	if (!n) return dest;
+
+
 #define MIN(a,b) ((a < b) ? a : b)
 
 
@@ -19,12 +24,14 @@ int ft_memcmp(const void *s1, const void *s2, size_t n);
 
 size_t ft_strlen(const char *s);
 char *ft_strdup(const char *s);
+char *ft_strndup(const char *s, size_t n);
 char *ft_strcpy(char *dest, const char *src);
 char *ft_strncpy(char *dest, const char *src, size_t n);
 char *ft_strcat(char *dest, const char *src);
 char *ft_strncat(char *dest, const char *src, size_t n);
 char *ft_strchr(const char *s, int c);
 char *ft_strrchr(const char *s, int c);
+char *ft_strchrnul(const char *s, int c);
 char *ft_strstr(const char *haystack, const char *needle);
 int ft_strcmp(const char *s1, const char *s2);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -78,6 +85,14 @@ int ft_strnequ(char const *s1, char const *s2, size_t n);
 
 char *ft_strfind_char(const char const *s, const char c, size_t *n_conseq);
 char *ft_strfind_str(const char const *s, const char const *cstr, size_t *n_conseq);
+
+#define ft_strfind(s,X,n) _Generic((X), \
+    const char: ft_strfind_char, \
+    char: ft_strfind_char, \
+    const char *: ft_strfind_str, \
+    char *: ft_strfind_str, \
+    default: ft_strfind_char \
+    )(s,X,n)
 
 char **ft_strsplit_char(char const *s, char c);
 char **ft_strsplit_str(char const *s, const char const *cstr);
