@@ -17,106 +17,72 @@ TEST_LDFLAGS =
 TEST_LIBS =
 
 TARGET = libft
-TARGET_LIB = $(TARGET).a
+TARGET_STATIC_LIB = $(TARGET).a
+TARGET_SHARED_LIB = $(TARGET).so
 
 TEST_TARGET = test
 TEST_SOURCES = test.c
 TEST_OBJECTS = $(TEST_SOURCES:.c=.o)
 
-SOURCES = 	ft_atoi.c \
-			ft_atol.c \
-			ft_bzero.c \
-			ft_free_strsplit.c \
-			ft_isalnum.c \
-			ft_isalpha.c \
-			ft_isascii.c \
-			ft_isdigit.c \
-			ft_islower.c \
-			ft_isprint.c \
-			ft_isspace.c \
-			ft_isupper.c \
-			ft_isxdigit.c \
-			ft_itoa.c \
-			ft_lstadd.c \
-			ft_lstdel.c \
-			ft_lstdelone.c \
-			ft_lstiter.c \
-			ft_lstmap.c \
-			ft_lstnew.c \
-			ft_lstpush_back.c \
-			ft_lstpush_front.c \
-			ft_ltoa.c \
-			ft_memalloc.c \
-			ft_memblockcpy.c \
-			ft_memccpy.c \
-			ft_memchr.c \
-			ft_memcmp.c \
-			ft_memcpy.c \
-			ft_memdel.c \
-			ft_memmove.c \
-			ft_memset.c \
-			ft_n_positions_allocate.c \
-			ft_putchar.c \
-			ft_putchar_fd.c \
-			ft_putendl.c \
-			ft_putendl_fd.c \
-			ft_putnbr.c \
-			ft_putnbr_fd.c \
-			ft_putstr.c \
-			ft_putstr_fd.c \
-			ft_readline.c \
-			ft_strcat.c \
-			ft_strchr.c \
-			ft_strclr.c \
-			ft_strcmp.c \
-			ft_strcpy.c \
-			ft_strdel.c \
-			ft_strdup.c \
-			ft_strequ.c \
-			ft_strfind_char.c \
-			ft_strfind_str.c \
-			ft_striter.c \
-			ft_striteri.c \
-			ft_strjoin.c \
-			ft_strlen.c \
-			ft_strmap.c \
-			ft_strmapi.c \
-			ft_strncat.c \
-			ft_strncmp.c \
-			ft_strncpy.c \
-			ft_strnequ.c \
-			ft_strnew.c \
-			ft_strrchr.c \
-			ft_strsplit_char.c \
-			ft_strsplit_str.c \
-			ft_strstr.c \
-			ft_strsub.c \
-			ft_strtrim.c \
-			ft_tolower.c \
-			ft_toupper.c
+SOURCES = 	./libft/ft_bzero.c \
+./libft/ft_memalloc.c \
+./libft/ft_memblockcpy.c \
+./libft/ft_memccpy.c \
+./libft/ft_memchr.c \
+./libft/ft_memcmp.c \
+./libft/ft_memcpy.c \
+./libft/ft_memdel.c \
+./libft/ft_memmove.c \
+./libft/ft_memset.c \
+./libft/ft_strcat.c \
+./libft/ft_strchr.c \
+./libft/ft_strchrnul.c \
+./libft/ft_strclr.c \
+./libft/ft_strcmp.c \
+./libft/ft_strcpy.c \
+./libft/ft_strdel.c \
+./libft/ft_strdup.c \
+./libft/ft_strlen.c \
+./libft/ft_strncat.c \
+./libft/ft_strncmp.c \
+./libft/ft_strncpy.c \
+./libft/ft_strndup.c \
+./libft/ft_strnew.c \
+./libft/ft_strrchr.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
 RM = rm -fr
 
-.PHONY: all, run_test, memtest, fulltest, distclean, objclean, clean
+.PHONY: all, run, memtest, fulltest, distclean, objclean, clean
 
-all: $(TARGET_LIB) $(TEST_TARGET)
+all: newline $(TARGET_STATIC_LIB) $(TARGET_SHARED_LIB) $(TEST_TARGET)
 
-$(TEST_TARGET): $(TEST_OBJECTS)
-	$(CC) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TEST_LDFLAGS) $(TEST_LIBS) -L./$(TARGET_LIB)
+newline:
+	@echo -n "\n"
 
-$(TEST_OBJECTS):
-	$(CC) $(TEST_STANDART) $(CFLAGS) $(TEST_DEBUG) -c $(TEST_SOURCES) -o $(TEST_OBJECTS)
+$(TARGET_STATIC_LIB): $(OBJECTS)
+	@echo "\nCreating a static library:\033[1;32m" $(TARGET_STATIC_LIB) "\033[0m"
+	@ar rc $(TARGET_STATIC_LIB) $(OBJECTS)
+	@ranlib $(TARGET_STATIC_LIB)
 
-$(TARGET_LIB): $(OBJECTS)
-	ar rc $(TARGET_LIB) $(OBJECTS)
-	ranlib $(TARGET_LIB)
+$(TARGET_SHARED_LIB): $(OBJECTS)
+	@echo "Creating a shared library:\033[1;32m" $(TARGET_SHARED_LIB).1.0.1 "\033[0m"
+	@$(CC) -shared -Wl,-soname,$(TARGET_SHARED_LIB).1 -o $(TARGET_SHARED_LIB).1.0.1 $(OBJECTS)
 
 %.o: %.c
-	$(CC) $(STANDART) $(CFLAGS) $(DEBUG) -c $< -o $@
+	@echo "Comiling\033[1;33m" $< "\033[0m""to""\033[1;36m" $@ "\033[0m"
+	@$(CC) $(STANDART) $(CFLAGS) -fPIC $(DEBUG) -c $< -o $@
 
-run_test: $(TARGET_LIB) $(TEST_TARGET)
+$(TEST_TARGET): $(TEST_OBJECTS) $(TARGET_STATIC_LIB)
+	@echo "Linking with\033[1;32m" $(TARGET_STATIC_LIB) "\033[0m-> \033[1;31m" $(TEST_TARGET) "\033[0m\n"
+	@$(CC) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TEST_LDFLAGS) $(TEST_LIBS) -L. -lft
+
+$(TEST_OBJECTS):
+	@echo -n "\nCompiling testcases to: \033[1;36m" $(TEST_OBJECTS) "\033[0m\n"
+	@$(CC) $(TEST_STANDART) $(CFLAGS) $(TEST_DEBUG) -c $(TEST_SOURCES) -o $(TEST_OBJECTS)
+
+run: $(TEST_TARGET)
 	./$(TEST_TARGET)
 
 memtest: all
@@ -127,7 +93,7 @@ memtest: all
 fulltest: clean memtest
 
 distclean:
-	@$(RM) $(TEST_TARGET) $(TARGET_LIB)
+	@$(RM) $(TEST_TARGET) $(TARGET_LIB) *.so.1* *.a
 
 objclean:
 	@$(RM) $(OBJECTS) $(TEST_OBJECTS)
