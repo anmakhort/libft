@@ -199,7 +199,6 @@ static unsigned _n_testcases_ = 0;
 
 #define PERFORM_TESTS int main() {		\
 				setbuf(stdout, NULL);	\
-				printf("\n");			\
 				__run_selected__();		\
 				_PRINT_RESULTS_			\
 				return 0;				\
