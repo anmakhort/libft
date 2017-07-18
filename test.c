@@ -31,7 +31,7 @@ TEST_CASE(ft_bzero_test) {
 
 	TEST_MEMORY_EQUAL("ft_bzero vs bzero", a, 10, b, 10)
 }
-/*
+
 TEST_CASE(ft_memcpy_test) {
 	AUTO_TESTCASE_INIT
 
@@ -310,8 +310,7 @@ TEST_CASE(ft_strrchr_test) {
 	TEST_EQUAL("Location test [ret ptr]ft_strrchr", (int)(ft_res-str), 7)
 	TEST_EQUAL("Is NULL when not found", ft_neg, NULL)
 }
-*/
-/*
+
 TEST_CASE(ft_strstr_test) {
 	AUTO_TESTCASE_INIT
 
@@ -326,6 +325,7 @@ TEST_CASE(ft_strstr_test) {
 	TEST_EQUAL("[ret ptr]ft_strstr == correct", ft_res, str+6)
 	TEST_EQUAL("Is NULL when not found", ft_neg, NULL)
 }
+
 TEST_CASE(ft_strcmp_test) {
 	AUTO_TESTCASE_INIT
 
@@ -359,7 +359,6 @@ TEST_CASE(ft_strncmp_test) {
 	TEST_LESS("(Not equi-sized) [ret]ft_strncmp < 0", ft_res2, 0)
 	TEST_EQUAL("(Same strings) [ret]ft_strncmp == 0", ft_res3, 0)
 }
-*/
 /*
 TEST_CASE(ft_isascii_test) {
 	AUTO_TESTCASE_INIT
@@ -613,7 +612,7 @@ TEST_CASE(ft_strsplit_test) {
 SELECTED_TEST_CASES {
 	SELECT(ft_memset_test)
 	SELECT(ft_bzero_test)
-	/*SELECT(ft_memcpy_test)
+	SELECT(ft_memcpy_test)
 	SELECT(ft_memccpy_test)
 	SELECT(ft_memmove_test)
 	SELECT(ft_memchr_test)
@@ -626,7 +625,7 @@ SELECTED_TEST_CASES {
 	SELECT(ft_strncat_test)
 	SELECT(ft_strchr_test)
 	SELECT(ft_strrchr_test)
-	//SELECT(ft_strstr_test)
+	SELECT(ft_strstr_test)
 	SELECT(ft_strcmp_test)
 	SELECT(ft_strncmp_test)
 	//SELECT(ft_isascii_test)
@@ -647,7 +646,7 @@ SELECTED_TEST_CASES {
 	//SELECT(ft_striteri_test)
 	//SELECT(ft_strmap_test)
 	//SELECT(ft_strmapi_test)
-	//SELECT(ft_strsplit_test)*/
+	//SELECT(ft_strsplit_test)
 }
 
 PERFORM_TESTS

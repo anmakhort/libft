@@ -48,7 +48,8 @@ SOURCES = 	./libft/ft_bzero.c \
 ./libft/ft_strncpy.c \
 ./libft/ft_strndup.c \
 ./libft/ft_strnew.c \
-./libft/ft_strrchr.c
+./libft/ft_strrchr.c \
+./libft/ft_strstr.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
