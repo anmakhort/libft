@@ -4,14 +4,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
 #define INITIAL_ARG_CHECK(dest, src, n)	\
 	if (!dest || !src) return NULL;		\
 	if (!n) return dest;
 
-
 #define MIN(a,b) ((a < b) ? a : b)
-
 
 void *ft_memset(void *s, int c, size_t n);
 void ft_bzero(void *s, size_t n);
@@ -35,16 +32,6 @@ char *ft_strchrnul(const char *s, int c);
 char *ft_strstr(const char *haystack, const char *needle);
 int ft_strcmp(const char *s1, const char *s2);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
-
-//size_t ft_strlcat(char *dst, const char *src, size_t size);
-
-//size_t ft_strlcat(char *dst, const char *src, size_t size) {
-//	if (!dst || !src) return 0;
-//	size_t m = MIN(size,ft_strlen(src));
-//	ft_memcpy(dst+ft_strlen(dst), src, m-ft_strlen(dst)-1);
-//	*(dst+ft_strlen(dst)+m) = '\0';
-//	return 
-//}
 
 int ft_isascii(int c);
 int ft_isupper(int c);
@@ -107,7 +94,6 @@ char **ft_strsplit_str(char const *s, const char const *cstr);
 
 void ft_free_strsplit(char *** const s);
 
-
 void ft_putchar(char c);
 void ft_putstr(char const *s);
 void ft_putendl(char const *s);
@@ -117,9 +103,7 @@ void ft_putstr_fd(char const *s, int fd);
 void ft_putendl_fd(char const *s, int fd);
 void ft_putnbr_fd(int n, int fd);
 
-
 char *ft_readline(int fd, size_t buff_size);
-
 
 typedef struct s_list {
 	void *content;
