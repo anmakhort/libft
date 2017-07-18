@@ -62,7 +62,11 @@ SOURCES = 	./libft/ft_bzero.c \
 ./libft/ft_toupper.c \
 ./libft/ft_tolower.c \
 ./libft/ft_atoi.c \
-./libft/ft_atol.c
+./libft/ft_atol.c \
+./libft/ft_n_digits_int.c \
+./libft/ft_n_digits_long.c \
+./libft/ft_itoa.c \
+./libft/ft_ltoa.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -73,30 +77,30 @@ RM = rm -fr
 all: newline $(TARGET_STATIC_LIB) $(TARGET_SHARED_LIB) $(TEST_TARGET)
 
 newline:
-	@echo -n "\n"
+	@echo ""
 
 $(TARGET_STATIC_LIB): $(OBJECTS)
-	@echo "\nCreating a static library:\033[1;32m" $(TARGET_STATIC_LIB) "\033[0m"
+	@echo "\033[32m  ✔ \033[0m\033[1;31m" $(TARGET_STATIC_LIB) "\033[0m"
 	@ar rc $(TARGET_STATIC_LIB) $(OBJECTS)
 	@ranlib $(TARGET_STATIC_LIB)
 
 $(TARGET_SHARED_LIB): $(OBJECTS)
-	@echo "Creating a shared library:\033[1;32m" $(TARGET_SHARED_LIB).1.0.1 "\033[0m"
+	@echo "\033[32m  ✔ \033[0m\033[1;31m" $(TARGET_SHARED_LIB).1.0.1 "\033[0m"
 	@$(CC) -shared -Wl,-soname,$(TARGET_SHARED_LIB).1 -o $(TARGET_SHARED_LIB).1.0.1 $(OBJECTS)
 
 %.o: %.c
-	@echo "Comiling\033[1;33m" $< "\033[0m""to""\033[1;36m" $@ "\033[0m"
+	@echo "\033[32m  ✔ \033[0m\033[1;33m" $< "\033[0m->\033[1;36m" $@ "\033[0m"
 	@$(CC) $(STANDART) $(CFLAGS) -fPIC $(DEBUG) -c $< -o $@
 
 $(TEST_TARGET): $(TEST_OBJECTS) $(TARGET_STATIC_LIB)
-	@echo "Linking with\033[1;32m" $(TARGET_STATIC_LIB) "\033[0m-> \033[1;31m" $(TEST_TARGET) "\033[0m\n"
+	@echo "\033[35m  ✔ \033[0m\033[1;36m" $(TEST_OBJECTS) "\033[0m&\033[1;31m" $(TARGET_STATIC_LIB) "\033[0m-> \033[1;34m" $(TEST_TARGET) "\033[0m"
 	@$(CC) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TEST_LDFLAGS) $(TEST_LIBS) -L. -lft
 
 $(TEST_OBJECTS):
-	@echo -n "\nCompiling testcases to: \033[1;36m" $(TEST_OBJECTS) "\033[0m\n"
+	@echo "\033[35m  ✔ \033[0m\033[1;33m" $(TEST_SOURCES) "\033[0m->\033[1;36m" $(TEST_OBJECTS) "\033[0m"
 	@$(CC) $(TEST_STANDART) $(CFLAGS) $(TEST_DEBUG) -c $(TEST_SOURCES) -o $(TEST_OBJECTS)
 
-run: $(TEST_TARGET)
+run: $(TEST_TARGET) newline
 	./$(TEST_TARGET)
 
 memtest: all
