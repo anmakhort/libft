@@ -1,7 +1,7 @@
 #define USE_TESTCASE_COUNTER
 #include "unittest.h"
 
-#include "libft/libft.h"
+#include "../src/libft.h"
 #include <ctype.h>
 #include <string.h>
 
@@ -563,7 +563,7 @@ TEST_CASE(ft_ltoa_test) {
 	ft_strdel(&num5);
 	ft_strdel(&num6);
 }
-/*
+
 
 void f(char *c) {
 	if (c) *c = ft_toupper(*c);
@@ -598,7 +598,7 @@ TEST_CASE(ft_striteri_test) {
 	TEST_MEMORY_EQUAL("Check indexing by iteration", str, ft_strlen(str), correct, ft_strlen(correct))
 }
 
-
+/*
 char f3(char c) {
 	return ft_toupper(c);
 }
@@ -680,8 +680,8 @@ SELECTED_TEST_CASES {
 	SELECT(ft_atol_test)
 	SELECT(ft_itoa_test)
 	SELECT(ft_ltoa_test)
-	//SELECT(ft_striter_test)
-	//SELECT(ft_striteri_test)
+	SELECT(ft_striter_test)
+	SELECT(ft_striteri_test)
 	//SELECT(ft_strmap_test)
 	//SELECT(ft_strmapi_test)
 	//SELECT(ft_strsplit_test)

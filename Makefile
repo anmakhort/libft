@@ -20,61 +20,63 @@ TARGET = libft
 TARGET_STATIC_LIB = $(TARGET).a
 TARGET_SHARED_LIB = $(TARGET).so
 
-TEST_TARGET = test
-TEST_SOURCES = test.c
+TEST_TARGET = ./test/test
+TEST_SOURCES = ./test/test.c
 TEST_OBJECTS = $(TEST_SOURCES:.c=.o)
 
-SOURCES = 	./libft/ft_bzero.c \
-./libft/ft_memalloc.c \
-./libft/ft_memblockcpy.c \
-./libft/ft_memccpy.c \
-./libft/ft_memchr.c \
-./libft/ft_memcmp.c \
-./libft/ft_memcpy.c \
-./libft/ft_memdel.c \
-./libft/ft_memmove.c \
-./libft/ft_memset.c \
-./libft/ft_strcat.c \
-./libft/ft_strchr.c \
-./libft/ft_strchrnul.c \
-./libft/ft_strclr.c \
-./libft/ft_strcmp.c \
-./libft/ft_strcpy.c \
-./libft/ft_strdel.c \
-./libft/ft_strdup.c \
-./libft/ft_strlen.c \
-./libft/ft_strncat.c \
-./libft/ft_strncmp.c \
-./libft/ft_strncpy.c \
-./libft/ft_strndup.c \
-./libft/ft_strnew.c \
-./libft/ft_strrchr.c \
-./libft/ft_strstr.c \
-./libft/ft_isascii.c \
-./libft/ft_isupper.c \
-./libft/ft_islower.c \
-./libft/ft_isalpha.c \
-./libft/ft_isdigit.c \
-./libft/ft_isxdigit.c \
-./libft/ft_isalnum.c \
-./libft/ft_isspace.c \
-./libft/ft_isprint.c \
-./libft/ft_toupper.c \
-./libft/ft_tolower.c \
-./libft/ft_atoi.c \
-./libft/ft_atol.c \
-./libft/ft_n_digits_int.c \
-./libft/ft_n_digits_long.c \
-./libft/ft_itoa.c \
-./libft/ft_ltoa.c \
-./libft/ft_putchar.c \
-./libft/ft_putstr.c \
-./libft/ft_putendl.c \
-./libft/ft_putnbr.c \
-./libft/ft_putchar_fd.c \
-./libft/ft_putstr_fd.c \
-./libft/ft_putendl_fd.c \
-./libft/ft_putnbr_fd.c
+SOURCES = 	./src/ft_bzero.c \
+		./src/ft_memalloc.c \
+		./src/ft_memblockcpy.c \
+		./src/ft_memccpy.c \
+		./src/ft_memchr.c \
+		./src/ft_memcmp.c \
+		./src/ft_memcpy.c \
+		./src/ft_memdel.c \
+		./src/ft_memmove.c \
+		./src/ft_memset.c \
+		./src/ft_strcat.c \
+		./src/ft_strchr.c \
+		./src/ft_strchrnul.c \
+		./src/ft_strclr.c \
+		./src/ft_strcmp.c \
+		./src/ft_strcpy.c \
+		./src/ft_strdel.c \
+		./src/ft_strdup.c \
+		./src/ft_strlen.c \
+		./src/ft_strncat.c \
+		./src/ft_strncmp.c \
+		./src/ft_strncpy.c \
+		./src/ft_strndup.c \
+		./src/ft_strnew.c \
+		./src/ft_strrchr.c \
+		./src/ft_strstr.c \
+		./src/ft_isascii.c \
+		./src/ft_isupper.c \
+		./src/ft_islower.c \
+		./src/ft_isalpha.c \
+		./src/ft_isdigit.c \
+		./src/ft_isxdigit.c \
+		./src/ft_isalnum.c \
+		./src/ft_isspace.c \
+		./src/ft_isprint.c \
+		./src/ft_toupper.c \
+		./src/ft_tolower.c \
+		./src/ft_atoi.c \
+		./src/ft_atol.c \
+		./src/ft_n_digits_int.c \
+		./src/ft_n_digits_long.c \
+		./src/ft_itoa.c \
+		./src/ft_ltoa.c \
+		./src/ft_putchar.c \
+		./src/ft_putstr.c \
+		./src/ft_putendl.c \
+		./src/ft_putnbr.c \
+		./src/ft_putchar_fd.c \
+		./src/ft_putstr_fd.c \
+		./src/ft_putendl_fd.c \
+		./src/ft_putnbr_fd.c \
+		./src/ft_striter.c \
+		./src/ft_striteri.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -109,7 +111,7 @@ $(TEST_OBJECTS):
 	@echo "\033[35m  ✔ \033[0m\033[1;33m" $(TEST_SOURCES) "\033[0m->\033[1;36m" $(TEST_OBJECTS) "\033[0m"
 
 run: $(TEST_TARGET) newline
-	./$(TEST_TARGET)
+	@./$(TEST_TARGET)
 
 memtest: all
 	@G_SLICE=always-malloc G_DEBUG=gc-friendly \

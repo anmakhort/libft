@@ -1,4 +1,5 @@
-*.o
+./src/*.o
+./test/*.o
+./test/test
 *.a
 *.so*
-test
