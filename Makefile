@@ -49,7 +49,18 @@ SOURCES = 	./libft/ft_bzero.c \
 ./libft/ft_strndup.c \
 ./libft/ft_strnew.c \
 ./libft/ft_strrchr.c \
-./libft/ft_strstr.c
+./libft/ft_strstr.c \
+./libft/ft_isascii.c \
+./libft/ft_isupper.c \
+./libft/ft_islower.c \
+./libft/ft_isalpha.c \
+./libft/ft_isdigit.c \
+./libft/ft_isxdigit.c \
+./libft/ft_isalnum.c \
+./libft/ft_isspace.c \
+./libft/ft_isprint.c \
+./libft/ft_toupper.c \
+./libft/ft_tolower.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

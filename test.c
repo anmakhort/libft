@@ -359,11 +359,11 @@ TEST_CASE(ft_strncmp_test) {
 	TEST_LESS("(Not equi-sized) [ret]ft_strncmp < 0", ft_res2, 0)
 	TEST_EQUAL("(Same strings) [ret]ft_strncmp == 0", ft_res3, 0)
 }
-/*
+
 TEST_CASE(ft_isascii_test) {
 	AUTO_TESTCASE_INIT
 	
-	TEST_EQUAL("[ret]ft_isascii('\0') == [ret]isascii('\0')", ft_isascii('\0'), isascii('\0'))
+	TEST_EQUAL("[ret]ft_isascii(0) == [ret]isascii(0)", ft_isascii('\0'), isascii('\0'))
 	TEST_EQUAL("[ret]ft_isascii('q') == 1", ft_isascii('q'), 1)
 	TEST_EQUAL("[ret]ft_isascii('4') == 1", ft_isascii('4'), 1)
 	TEST_EQUAL("[ret]ft_isascii('{') == 1", ft_isascii('{'), 1)
@@ -404,7 +404,7 @@ TEST_CASE(ft_isalpha_test) {
 TEST_CASE(ft_isdigit_test) {
 	AUTO_TESTCASE_INIT
 
-	TEST_EQUAL("[ret]ft_isdigit('0') == [ret]isdigit('0')", ft_isdigit('0'), isdigit('0'))
+	TEST_EQUAL("[ret]ft_isdigit('0') == 1", ft_isdigit('0'), 1)
 	TEST_EQUAL("[ret]ft_isdigit('q') == 0", ft_isdigit('q'), 0)
 	TEST_EQUAL("[ret]ft_isdigit('E') == 0", ft_isdigit('E'), 0)
 	TEST_EQUAL("[ret]ft_isdigit('+') == 0", ft_isdigit('+'), 0)
@@ -414,9 +414,10 @@ TEST_CASE(ft_isdigit_test) {
 TEST_CASE(ft_isxdigit_test) {
 	AUTO_TESTCASE_INIT
 	
-	TEST_EQUAL("[ret]ft_isxdigit('0') == [ret]isxdigit('0')", ft_isxdigit('0'), isxdigit('0'))
+	TEST_EQUAL("[ret]ft_isxdigit('0') == 1", ft_isxdigit('0'), 1)
 	TEST_EQUAL("[ret]ft_isxdigit('q') == 0", ft_isxdigit('q'), 0)
-	TEST_NOT_EQUAL("[ret]ft_isxdigit('E') != 0", ft_isxdigit('E'), 0)
+	TEST_EQUAL("[ret]ft_isxdigit('e') == 1", ft_isxdigit('e'), 1)
+	TEST_EQUAL("[ret]ft_isxdigit('E') == 1", ft_isxdigit('E'), 1)
 	TEST_EQUAL("[ret]ft_isxdigit('+') == 0", ft_isxdigit('+'), 0)
 	TEST_EQUAL("[ret]ft_isxdigit(128) == [ret]isxdigit(128)", ft_isxdigit(128), isxdigit(128))
 }
@@ -424,9 +425,9 @@ TEST_CASE(ft_isxdigit_test) {
 TEST_CASE(ft_isalnum_test) {
 	AUTO_TESTCASE_INIT
 
-	TEST_EQUAL("[ret]ft_isalnum('0') == [ret]isalnum('0')", ft_isalnum('0'), isalnum('0'))
-	TEST_NOT_EQUAL("[ret]ft_isalnum('q') != 0", ft_isalnum('q'), 1)
-	TEST_NOT_EQUAL("[ret]ft_isalnum('E') != 0", ft_isalnum('E'), 0)
+	TEST_EQUAL("[ret]ft_isalnum('0') == 1", ft_isalnum('0'), 1)
+	TEST_EQUAL("[ret]ft_isalnum('q') == 1", ft_isalnum('q'), 1)
+	TEST_EQUAL("[ret]ft_isalnum('E') == 1", ft_isalnum('E'), 1)
 	TEST_EQUAL("[ret]ft_isalnum('+') == 0", ft_isalnum('+'), 0)
 	TEST_EQUAL("[ret]ft_isalnum(128) == [ret]isalnum(128)", ft_isalnum(128), isalnum(128))
 }
@@ -436,18 +437,22 @@ TEST_CASE(ft_isspace_test) {
 
 	TEST_EQUAL("[ret]ft_isspace('0') == [ret]isspace('0')", ft_isspace('0'), isspace('0'))
 	TEST_EQUAL("[ret]ft_isspace('q') == 0", ft_isspace('q'), 0)
-	TEST_NOT_EQUAL("[ret]ft_isspace(' ') != 0", ft_isspace(' '), 0)
-	TEST_NOT_EQUAL("[ret]ft_isspace('\t') != 0", ft_isspace('\t'), 1)
-	TEST_EQUAL("[ret]ft_isspace('\n') == [ret]isspace('\n')", ft_isspace('\n'), isspace('\n'))
+	TEST_EQUAL("[ret]ft_isspace(space) == 1", ft_isspace(' '), 1)
+	TEST_EQUAL("[ret]ft_isspace(tab) == 1", ft_isspace('\t'), 1)
+	TEST_EQUAL("[ret]ft_isspace(newline) == 1", ft_isspace('\n'), 1)
 }
 
 TEST_CASE(ft_isprint_test) {
 	AUTO_TESTCASE_INIT
-
-	TEST_EQUAL("[ret]ft_isprint(54) == [ret]isprint(54)", ft_isprint(54), isprint(54))
-	TEST_NOT_EQUAL("[ret]ft_isprint('*') != 0", ft_isprint('*'), 1)
+	
+	TEST_EQUAL("[ret]ft_isprint(54) == 1", ft_isprint(54), 1)
+	TEST_EQUAL("[ret]ft_isprint('*') == 1", ft_isprint('*'), 1)
 	TEST_EQUAL("[ret]ft_isprint(200) == 0", ft_isprint(200), 0)
-	TEST_NOT_EQUAL("[ret]ft_isprint('\n') != 0", ft_isprint('\n'), 1)
+	TEST_EQUAL("[ret]ft_isprint(space) == 1", ft_isprint(' '), 1)
+	TEST_EQUAL("[ret]ft_isprint(newline) == 0", ft_isprint('\n'), 0)
+	TEST_EQUAL("[ret]ft_isprint(tab) == 0", ft_isprint('\t'), 0)
+	TEST_EQUAL("[ret]ft_isprint(vtab) == 0", ft_isprint('\v'), 0)
+	TEST_EQUAL("[ret]ft_isprint(cr) == 0", ft_isprint('\r'), 0)
 	TEST_EQUAL("[ret]ft_isprint(128) == [ret]isprint(128)", ft_isprint(128), isprint(128))
 }
 
@@ -470,7 +475,7 @@ TEST_CASE(ft_tolower_test) {
 	TEST_EQUAL("[ret]ft_tolower('g') == 'g'", ft_tolower('g'), 'g')
 	TEST_EQUAL("[ret]ft_tolower(128) == [ret]tolower(128)", ft_tolower(128), tolower(128))
 }
-
+/*
 TEST_CASE(ft_atoi_test) {
 	AUTO_TESTCASE_INIT
 
@@ -628,17 +633,17 @@ SELECTED_TEST_CASES {
 	SELECT(ft_strstr_test)
 	SELECT(ft_strcmp_test)
 	SELECT(ft_strncmp_test)
-	//SELECT(ft_isascii_test)
-	//SELECT(ft_isupper_test)
-	//SELECT(ft_islower_test)
-	//SELECT(ft_isalpha_test)
-	//SELECT(ft_isdigit_test)
-	//SELECT(ft_isxdigit_test)
-	//SELECT(ft_isalnum_test)
-	//SELECT(ft_isspace_test)
-	//SELECT(ft_isprint_test)
-	//SELECT(ft_toupper_test)
-	//SELECT(ft_tolower_test)
+	SELECT(ft_isascii_test)
+	SELECT(ft_isupper_test)
+	SELECT(ft_islower_test)
+	SELECT(ft_isalpha_test)
+	SELECT(ft_isdigit_test)
+	SELECT(ft_isxdigit_test)
+	SELECT(ft_isalnum_test)
+	SELECT(ft_isspace_test)
+	SELECT(ft_isprint_test)
+	SELECT(ft_toupper_test)
+	SELECT(ft_tolower_test)
 	//SELECT(ft_atoi_test)
 	//SELECT(ft_atol_test)
 	//SELECT(ft_itoa_test)
