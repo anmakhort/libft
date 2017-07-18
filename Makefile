@@ -66,7 +66,15 @@ SOURCES = 	./libft/ft_bzero.c \
 ./libft/ft_n_digits_int.c \
 ./libft/ft_n_digits_long.c \
 ./libft/ft_itoa.c \
-./libft/ft_ltoa.c
+./libft/ft_ltoa.c \
+./libft/ft_putchar.c \
+./libft/ft_putstr.c \
+./libft/ft_putendl.c \
+./libft/ft_putnbr.c \
+./libft/ft_putchar_fd.c \
+./libft/ft_putstr_fd.c \
+./libft/ft_putendl_fd.c \
+./libft/ft_putnbr_fd.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -80,25 +88,25 @@ newline:
 	@echo ""
 
 $(TARGET_STATIC_LIB): $(OBJECTS)
-	@echo "\033[32m  ✔ \033[0m\033[1;31m" $(TARGET_STATIC_LIB) "\033[0m"
 	@ar rc $(TARGET_STATIC_LIB) $(OBJECTS)
 	@ranlib $(TARGET_STATIC_LIB)
+	@echo "\033[32m  ✔ \033[0m\033[1;31m" $(TARGET_STATIC_LIB) "\033[0m"
 
 $(TARGET_SHARED_LIB): $(OBJECTS)
-	@echo "\033[32m  ✔ \033[0m\033[1;31m" $(TARGET_SHARED_LIB).1.0.1 "\033[0m"
 	@$(CC) -shared -Wl,-soname,$(TARGET_SHARED_LIB).1 -o $(TARGET_SHARED_LIB).1.0.1 $(OBJECTS)
+	@echo "\033[32m  ✔ \033[0m\033[1;31m" $(TARGET_SHARED_LIB).1.0.1 "\033[0m"
 
 %.o: %.c
-	@echo "\033[32m  ✔ \033[0m\033[1;33m" $< "\033[0m->\033[1;36m" $@ "\033[0m"
 	@$(CC) $(STANDART) $(CFLAGS) -fPIC $(DEBUG) -c $< -o $@
+	@echo "\033[32m  ✔ \033[0m\033[1;33m" $< "\033[0m->\033[1;36m" $@ "\033[0m"
 
 $(TEST_TARGET): $(TEST_OBJECTS) $(TARGET_STATIC_LIB)
-	@echo "\033[35m  ✔ \033[0m\033[1;36m" $(TEST_OBJECTS) "\033[0m&\033[1;31m" $(TARGET_STATIC_LIB) "\033[0m-> \033[1;34m" $(TEST_TARGET) "\033[0m"
 	@$(CC) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TEST_LDFLAGS) $(TEST_LIBS) -L. -lft
+	@echo "\033[35m  ✔ \033[0m\033[1;36m" $(TEST_OBJECTS) "\033[0m&\033[1;31m" $(TARGET_STATIC_LIB) "\033[0m-> \033[1;34m" $(TEST_TARGET) "\033[0m"
 
 $(TEST_OBJECTS):
-	@echo "\033[35m  ✔ \033[0m\033[1;33m" $(TEST_SOURCES) "\033[0m->\033[1;36m" $(TEST_OBJECTS) "\033[0m"
 	@$(CC) $(TEST_STANDART) $(CFLAGS) $(TEST_DEBUG) -c $(TEST_SOURCES) -o $(TEST_OBJECTS)
+	@echo "\033[35m  ✔ \033[0m\033[1;33m" $(TEST_SOURCES) "\033[0m->\033[1;36m" $(TEST_OBJECTS) "\033[0m"
 
 run: $(TEST_TARGET) newline
 	./$(TEST_TARGET)
