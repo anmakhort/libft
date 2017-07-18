@@ -337,10 +337,12 @@ TEST_CASE(ft_strcmp_test) {
 	int ft_res = ft_strcmp(str1, str2);
 	int ft_res2 = ft_strcmp(str1, str3);
 	int ft_res3 = ft_strcmp(str1, str4);
+	int ft_res4 = ft_strcmp(str2, str3);
 
 	TEST_LESS("[ret]ft_strcmp < 0", ft_res, 0)
 	TEST_LESS("(Not equi-sized) [ret]ft_strcmp < 0", ft_res2, 0)
 	TEST_EQUAL("(Same strings) [ret]ft_strcmp == 0", ft_res3, 0)
+	TEST_EQUAL("(Not equi-sized) [ret]ft_strcmp == 1", ft_res4, 1)
 }
 
 TEST_CASE(ft_strncmp_test) {
@@ -598,7 +600,7 @@ TEST_CASE(ft_striteri_test) {
 	TEST_MEMORY_EQUAL("Check indexing by iteration", str, ft_strlen(str), correct, ft_strlen(correct))
 }
 
-/*
+
 char f3(char c) {
 	return ft_toupper(c);
 }
@@ -630,6 +632,115 @@ TEST_CASE(ft_strmapi_test) {
 	ft_strdel(&ft_res);
 }
 
+TEST_CASE(ft_strequ_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *str1 = "Hello";
+	const char *str2 = "hello";
+	const char *str3 = "he";
+	const char *str4 = "Hello";
+
+	int ft_res1 = ft_strequ(str1, str2);
+	int ft_res2 = ft_strequ(str1, str3);
+	int ft_res3 = ft_strequ(str1, str4);
+	int ft_res4 = ft_strequ(str2, str3);
+
+	TEST_EQUAL("[ret]ft_strequ == 0", ft_res1, 0)
+	TEST_EQUAL("(Not equi-sized) [ret]ft_strequ == 0", ft_res2, 0)
+	TEST_EQUAL("(Same strings) [ret]ft_strequ == 1", ft_res3, 1)
+	TEST_EQUAL("(Not equi-sized) [ret]ft_strequ == 0", ft_res4, 0)
+}
+
+TEST_CASE(ft_strnequ_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *str1 = "Hello";
+	const char *str2 = "hello";
+	const char *str3 = "he";
+	const char *str4 = "Hello";
+
+	int ft_res1 = ft_strnequ(str1, str2, 3);
+	int ft_res2 = ft_strnequ(str1, str3, 2);
+	int ft_res3 = ft_strnequ(str1, str4, 3);
+	int ft_res4 = ft_strnequ(str2, str3, 2);
+
+	TEST_EQUAL("[ret]ft_strnequ == 0", ft_res1, 0)
+	TEST_EQUAL("(Not equi-sized) [ret]ft_strnequ == 0", ft_res2, 0)
+	TEST_EQUAL("(Same strings) [ret]ft_strnequ == 1", ft_res3, 1)
+	TEST_EQUAL("(Not equi-sized) [ret]ft_strnequ == 1", ft_res4, 1)
+}
+
+TEST_CASE(ft_strsub_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *str1 = "Hello World!";
+	const char *correct1 = "Hello World!";
+	const char *correct2 = "Hello";
+	const char *correct3 = "World!";
+
+	char *ft_sub1 = ft_strsub(str1, 0, ft_strlen(str1));
+	char *ft_sub2 = ft_strsub(str1, 0, 5);
+	char *ft_sub3 = ft_strsub(str1, 6, 6);
+
+	TEST_MEMORY_EQUAL("[ret]ft_strsub == correct1", ft_sub1, 12, correct1, 12)
+	TEST_MEMORY_EQUAL("[ret]ft_strsub == correct2", ft_sub2, 5, correct2, 5)
+	TEST_MEMORY_EQUAL("[ret]ft_strsub == correct3", ft_sub3, 6, correct3, 6)
+
+	ft_strdel(&ft_sub1);
+	ft_strdel(&ft_sub2);
+	ft_strdel(&ft_sub3);
+}
+
+TEST_CASE(ft_strjoin_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *str1 = "Hello";
+	const char *str2 = " ";
+	const char *str3 = "World";
+	const char *str4 = "!";
+	const char *correct1 = "Hello";
+	const char *correct2 = "Hello ";
+	const char *correct3 = "Hello World";
+	const char *correct4 = "Hello World!";
+
+	char *ft_res1 = ft_strjoin(str1, str2);
+	char *ft_res2 = ft_strjoin(ft_res1, str3);
+	char *ft_res3 = ft_strjoin(ft_res2, str4);
+	char *ft_res4 = ft_strjoin(ft_res3, NULL);
+
+	TEST_MEMORY_EQUAL("[ret]ft_strjoin == correct1", ft_res1, 5, correct1, 5)
+	TEST_MEMORY_EQUAL("[ret]ft_strjoin == correct2", ft_res2, 6, correct2, 6)
+	TEST_MEMORY_EQUAL("[ret]ft_strjoin == correct3", ft_res3, 11, correct3, 11)
+	TEST_MEMORY_EQUAL("[ret]ft_strjoin == correct4", ft_res4, 12, correct4, 12)
+
+	ft_strdel(&ft_res1);
+	ft_strdel(&ft_res2);
+	ft_strdel(&ft_res3);
+	ft_strdel(&ft_res4);
+}
+
+TEST_CASE(ft_strtrim_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *str1 = "  \t\n  Hello World! \t\t\n ";
+	const char *str2 = "  \t\n  Hello World!";
+	const char *str3 = "Hello World! \t\t\n ";
+	const char *correct = "Hello World!";
+
+	char *ft_res1 = ft_strtrim(str1);
+	char *ft_res2 = ft_strtrim(str2);
+	char *ft_res3 = ft_strtrim(str3);
+
+	TEST_MEMORY_EQUAL("[ret]ft_strtrim == correct", ft_res1, 12, correct, 12)
+	TEST_MEMORY_EQUAL("[ret]ft_strtrim == correct", ft_res2, 12, correct, 12)
+	TEST_MEMORY_EQUAL("[ret]ft_strtrim == correct", ft_res3, 12, correct, 12)
+
+	ft_strdel(&ft_res1);
+	ft_strdel(&ft_res2);
+	ft_strdel(&ft_res3);
+}
+
+/*
 TEST_CASE(ft_strsplit_test) {
 	AUTO_TESTCASE_INIT
 
@@ -682,8 +793,13 @@ SELECTED_TEST_CASES {
 	SELECT(ft_ltoa_test)
 	SELECT(ft_striter_test)
 	SELECT(ft_striteri_test)
-	//SELECT(ft_strmap_test)
-	//SELECT(ft_strmapi_test)
+	SELECT(ft_strmap_test)
+	SELECT(ft_strmapi_test)
+	SELECT(ft_strequ_test)
+	SELECT(ft_strnequ_test)
+	SELECT(ft_strsub_test)
+	SELECT(ft_strjoin_test)
+	SELECT(ft_strtrim_test)
 	//SELECT(ft_strsplit_test)
 }
 

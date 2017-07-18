@@ -24,7 +24,8 @@ TEST_TARGET = ./test/test
 TEST_SOURCES = ./test/test.c
 TEST_OBJECTS = $(TEST_SOURCES:.c=.o)
 
-SOURCES = 	./src/ft_bzero.c \
+SOURCES =	./src/ft_sign.c \
+		./src/ft_bzero.c \
 		./src/ft_memalloc.c \
 		./src/ft_memblockcpy.c \
 		./src/ft_memccpy.c \
@@ -76,7 +77,14 @@ SOURCES = 	./src/ft_bzero.c \
 		./src/ft_putendl_fd.c \
 		./src/ft_putnbr_fd.c \
 		./src/ft_striter.c \
-		./src/ft_striteri.c
+		./src/ft_striteri.c \
+		./src/ft_strmap.c \
+		./src/ft_strmapi.c \
+		./src/ft_strequ.c \
+		./src/ft_strnequ.c \
+		./src/ft_strsub.c \
+		./src/ft_strjoin.c \
+		./src/ft_strtrim.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
