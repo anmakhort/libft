@@ -444,7 +444,7 @@ TEST_CASE(ft_isspace_test) {
 
 TEST_CASE(ft_isprint_test) {
 	AUTO_TESTCASE_INIT
-	
+
 	TEST_EQUAL("[ret]ft_isprint(54) == 1", ft_isprint(54), 1)
 	TEST_EQUAL("[ret]ft_isprint('*') == 1", ft_isprint('*'), 1)
 	TEST_EQUAL("[ret]ft_isprint(200) == 0", ft_isprint(200), 0)
@@ -475,7 +475,7 @@ TEST_CASE(ft_tolower_test) {
 	TEST_EQUAL("[ret]ft_tolower('g') == 'g'", ft_tolower('g'), 'g')
 	TEST_EQUAL("[ret]ft_tolower(128) == [ret]tolower(128)", ft_tolower(128), tolower(128))
 }
-/*
+
 TEST_CASE(ft_atoi_test) {
 	AUTO_TESTCASE_INIT
 
@@ -499,7 +499,7 @@ TEST_CASE(ft_atol_test) {
 	TEST_EQUAL("[ret]ft_atol(\"12.5\") == [ret]atol(\"12.5\")", ft_atol("12.5"), atol("12.5"))
 	TEST_EQUAL("[ret]ft_atol(\"qwerty\") == [ret]atol(\"qwerty\")", ft_atol("qwerty"), atol("qwerty"))
 }
-
+/*
 TEST_CASE(ft_itoa_test) {
 	AUTO_TESTCASE_INIT
 
@@ -644,8 +644,8 @@ SELECTED_TEST_CASES {
 	SELECT(ft_isprint_test)
 	SELECT(ft_toupper_test)
 	SELECT(ft_tolower_test)
-	//SELECT(ft_atoi_test)
-	//SELECT(ft_atol_test)
+	SELECT(ft_atoi_test)
+	SELECT(ft_atol_test)
 	//SELECT(ft_itoa_test)
 	//SELECT(ft_striter_test)
 	//SELECT(ft_striteri_test)

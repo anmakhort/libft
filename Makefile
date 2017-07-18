@@ -60,7 +60,9 @@ SOURCES = 	./libft/ft_bzero.c \
 ./libft/ft_isspace.c \
 ./libft/ft_isprint.c \
 ./libft/ft_toupper.c \
-./libft/ft_tolower.c
+./libft/ft_tolower.c \
+./libft/ft_atoi.c \
+./libft/ft_atol.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
