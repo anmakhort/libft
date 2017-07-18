@@ -499,7 +499,7 @@ TEST_CASE(ft_atol_test) {
 	TEST_EQUAL("[ret]ft_atol(\"12.5\") == [ret]atol(\"12.5\")", ft_atol("12.5"), atol("12.5"))
 	TEST_EQUAL("[ret]ft_atol(\"qwerty\") == [ret]atol(\"qwerty\")", ft_atol("qwerty"), atol("qwerty"))
 }
-/*
+
 TEST_CASE(ft_itoa_test) {
 	AUTO_TESTCASE_INIT
 
@@ -518,11 +518,11 @@ TEST_CASE(ft_itoa_test) {
 	const char *correct6 = "1234567890";
 
 	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(125) == \"125\"", num1, 3, correct1, 3)
-	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(125) == \"125\"", num2, 4, correct2, 4)
-	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(125) == \"125\"", num3, 1, correct3, 1)
-	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(125) == \"125\"", num4, 1, correct4, 1)
-	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(125) == \"125\"", num5, 2, correct5, 2)
-	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(125) == \"125\"", num6, 10, correct6, 10)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(-125) == \"-125\"", num2, 4, correct2, 4)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(0) == \"0\"", num3, 1, correct3, 1)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(1) == \"1\"", num4, 1, correct4, 1)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(-1) == \"-1\"", num5, 2, correct5, 2)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_itoa(1234567890) == \"1234567890\"", num6, 10, correct6, 10)
 
 	ft_strdel(&num1);
 	ft_strdel(&num2);
@@ -532,6 +532,38 @@ TEST_CASE(ft_itoa_test) {
 	ft_strdel(&num6);
 }
 
+TEST_CASE(ft_ltoa_test) {
+	AUTO_TESTCASE_INIT
+
+	char *num1 = ft_ltoa(125);
+	char *num2 = ft_ltoa(-125);
+	char *num3 = ft_ltoa(0);
+	char *num4 = ft_ltoa(1);
+	char *num5 = ft_ltoa(-1);
+	char *num6 = ft_ltoa(1234567890);
+
+	const char *correct1 = "125";
+	const char *correct2 = "-125";
+	const char *correct3 = "0";
+	const char *correct4 = "1";
+	const char *correct5 = "-1";
+	const char *correct6 = "1234567890";
+
+	TEST_MEMORY_EQUAL("[ret ptr]ft_ltoa(125) == \"125\"", num1, 3, correct1, 3)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_ltoa(-125) == \"-125\"", num2, 4, correct2, 4)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_ltoa(0) == \"0\"", num3, 1, correct3, 1)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_ltoa(1) == \"1\"", num4, 1, correct4, 1)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_ltoa(-1) == \"-1\"", num5, 2, correct5, 2)
+	TEST_MEMORY_EQUAL("[ret ptr]ft_ltoa(1234567890) == \"1234567890\"", num6, 10, correct6, 10)
+
+	ft_strdel(&num1);
+	ft_strdel(&num2);
+	ft_strdel(&num3);
+	ft_strdel(&num4);
+	ft_strdel(&num5);
+	ft_strdel(&num6);
+}
+/*
 
 void f(char *c) {
 	if (c) *c = ft_toupper(*c);
@@ -646,7 +678,8 @@ SELECTED_TEST_CASES {
 	SELECT(ft_tolower_test)
 	SELECT(ft_atoi_test)
 	SELECT(ft_atol_test)
-	//SELECT(ft_itoa_test)
+	SELECT(ft_itoa_test)
+	SELECT(ft_ltoa_test)
 	//SELECT(ft_striter_test)
 	//SELECT(ft_striteri_test)
 	//SELECT(ft_strmap_test)

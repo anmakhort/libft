@@ -61,8 +61,8 @@ int ft_tolower(int c);
 int ft_atoi(const char *nptr);
 long ft_atol(const char *nptr);
 
-size_t ft_n_positions_allocate_int(int number);
-size_t ft_n_positions_allocate_long(long number);
+size_t ft_n_digits_int(int number);
+size_t ft_n_digits_long(long number);
 
 char *ft_itoa(int number);
 char *ft_ltoa(long number);
