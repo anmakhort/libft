@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define DEFAULT_BUFF_SIZE 512
+#ifndef BUFF_SIZE
+#define BUFF_SIZE 32
+#endif
 
 #define REALLOC_SAFE(arr, size)     \
     char *tmp = realloc(arr, size); \

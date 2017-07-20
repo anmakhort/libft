@@ -1,5 +1,15 @@
 #include "libft.h"
 
+#ifdef BUFF_SIZE
+	#if BUFF_SIZE < 1 || BUFF_SIZE > 4096
+		#undef BUFF_SIZE
+		#define BUFF_SIZE 32
+	#endif
+#else
+	#define BUFF_SIZE 32
+#endif
+
+
 static t_list *global;
 
 typedef struct content_s {
@@ -41,12 +51,12 @@ ssize_t _read(t_list **head, const int fd) {
 		ptr = ptr->next;
 		ptr->next = NULL;
 	}
-	char buff[DEFAULT_BUFF_SIZE+1] = {0};
+	char buff[BUFF_SIZE+1] = {0};
 	ssize_t n_read = 0;
-	if ((n_read = read(fd, buff, DEFAULT_BUFF_SIZE)) > 0) {
+	if ((n_read = read(fd, buff, BUFF_SIZE)) > 0) {
 		buff[n_read] = '\0';
 		char *tmp = NULL;
-		if (n_read == DEFAULT_BUFF_SIZE) \
+		if (n_read == BUFF_SIZE) \
 			tmp = ft_strjoin(((content_t*)(ptr->content))->buff, buff);
 		else {
 			char *sub = ft_strsub(buff, 0, n_read);
@@ -81,6 +91,21 @@ char *_find(t_list **head, const char c, const int fd) {
 		if (*ptr_str == c) break;
 		n++;
 		ptr_str++;
+	}
+	if (*ptr_str || n == (((content_t*)(ptr->content)))->buff_size) {
+		size_t offset = 0;
+		while (ft_strchr((((content_t*)(ptr->content)))->buff+offset, c) == NULL) {
+			ssize_t read = _read(head, fd);
+			if (read <= 0) break;
+			offset += read;
+		}
+		n = 0;
+		ptr_str = (((content_t*)(ptr->content)))->buff;
+		while (*ptr_str) {
+			if (*ptr_str == c) break;
+			n++;
+			ptr_str++;
+		}
 	}
 	sub = ft_strsub((((content_t*)(ptr->content)))->buff, 0, n);
 	if (sub) {
