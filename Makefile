@@ -95,7 +95,11 @@ SOURCES = \
 		./src/ft_strjoin.c \
 		./src/ft_strtrim.c \
 		./src/ft_readAll.c \
-		./src/ft_getnextline.c
+		./src/ft_getnextline.c \
+		./src/ft_strfind_char.c \
+		./src/ft_strfind_str.c \
+		./src/ft_strsplit_char.c \
+		./src/ft_free_strsplit.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

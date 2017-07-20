@@ -761,6 +761,8 @@ TEST_CASE(ft_readAll_test) {
 			printf("NULL str was returned!\n");
 		}
 		close(fd);
+
+		TEST_EQUAL("passed if all is ok", 1, 1)
 	} else {
 		perror("Can't open file!");
 	}
@@ -804,6 +806,8 @@ TEST_CASE(ft_getnextline_test) {
 
 		if ((str = ft_getnextline(fd2)) != NULL) printf("File2: %s\n", str);
 		free(str);
+
+		TEST_EQUAL("passed if all is ok", 1, 1)
 	} else {
 		perror("Can't open files!");
 	}
@@ -820,6 +824,51 @@ TEST_CASE(ft_getnextline_test) {
 
 	close(fd1);
 	close(fd2);
+
+	TEST_EQUAL("passed if free_resources is ok", 1, 1)
+}
+
+TEST_CASE(ft_strfind_char_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *str = "012345qqq67890";
+
+	char *ft_ptr = ft_strfind_char(str, 'q', NULL);
+	size_t q_count = 0;
+	char *ft_ptr2 = ft_strfind_char(str, 'q', &q_count);
+
+	TEST_EQUAL("[ret]ft_strfind_char == correct ptr", ft_ptr, (str+6))
+	TEST_EQUAL("[ret]ft_strfind_char == [ret]ft_strfind_char with n_conseq", ft_ptr, ft_ptr2)
+	TEST_EQUAL("[ret]ft_strfind_char's n_conseq == correct", q_count, 3)
+}
+
+TEST_CASE(ft_strfind_str_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *str = "012345qqqqqq67890";
+
+	char *ft_ptr = ft_strfind_str(str, "qq", NULL);
+	size_t qq_count = 0;
+	char *ft_ptr2 = ft_strfind_str(str, "qq", &qq_count);
+
+	TEST_EQUAL("[ret]ft_strfind_str == correct ptr", ft_ptr, (str+6))
+	TEST_EQUAL("[ret]ft_strfind_str == [ret]ft_strfind_str with n_conseq", ft_ptr, ft_ptr2)
+	TEST_EQUAL("[ret]ft_strfind_str's n_conseq == correct", qq_count, 3)
+}
+
+TEST_CASE(ft_strsplit_char_test) {
+	AUTO_TESTCASE_INIT
+
+	char **splitted = ft_strsplit("**salut*les***etudiants*", '*');
+
+	printf("%d\n", splitted == NULL);
+
+	char **ptr = splitted;
+	while (ptr && *ptr) {
+		printf("%s\n", *(ptr++));
+	}
+
+	ft_free_strsplit(&splitted);
 }
 
 /*
@@ -884,6 +933,9 @@ SELECTED_TEST_CASES {
 	SELECT(ft_strtrim_test)
 	SELECT(ft_readAll_test)
 	SELECT(ft_getnextline_test)
+	SELECT(ft_strfind_char_test)
+	SELECT(ft_strfind_str_test)
+	SELECT(ft_strsplit_char_test)
 	//SELECT(ft_strsplit_test)
 }
 
