@@ -1,0 +1,15 @@
+1) Lets continue with our first system call open()
+2) whose purpose is to open file for reading or
+3) writing or to create new file. You should open
+4) it's man page if you haven't already done so
+5) using man 2 open command and read trough basics
+6) (2 is manual section number, use man man to read
+7) more about integrated manual section numbers).
+8) In the following example we also use read() and
+9) write() system calls to copy from one file
+10) descriptor to the other (both descriptors returned
+11) by open() system call so it is wise to open
+12) their man pages as well (man 2 read and man 2 write).
+13) So here's the example code for program that
+14) copies input file passed as first argument
+15) into output file passed as second argument.

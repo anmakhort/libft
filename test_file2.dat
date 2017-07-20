@@ -1,0 +1,15 @@
+1) read()  attempts to read up to count bytes from
+2) file descriptor fd into the buffer starting at buf.
+3) On files that support seeking, the read operation
+4) commences at the file offset, and the file offset
+5) is incremented by the number of bytes read. If the
+6) file offset is at or past the end of file, no
+7) bytes  are  read, and read() returns zero.
+8) If count is zero, read() may detect the errors
+9) described below.  In the absence of any errors,
+10) or if read() does not check for errors, a read()
+11) with a count of 0 returns zero and has no other effects.
+12) On success, the number of bytes read is returned (zero
+13) indicates end of file), and the file position is advanced
+14) by this number.  It is not  an error  if  this  number
+15) is smaller than the number of bytes requested;
