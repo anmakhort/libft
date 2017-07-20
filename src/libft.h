@@ -16,6 +16,19 @@
         arr = tmp;                  \
     }
 
+#define ALLOCATE_2D(arr, type, size)        \
+    arr = (type*)malloc(size*sizeof(type));
+
+#define REALLOC_2D_SAFE(arr, type, size, _del_func, ...)    \
+    type* tmp = realloc(arr, size*sizeof(type));            \
+    if (!tmp) {                                             \
+        _del_func(&arr);                                    \
+        __VA_ARGS__                                         \
+        return NULL;                                        \
+    } else {                                                \
+        arr = tmp;                                          \
+    }
+
 #define INITIAL_ARG_CHECK(dest, src, n)	\
 	if (!dest || !src) return NULL;		\
 	if (!n) return dest;
@@ -107,6 +120,7 @@ extern char **ft_strsplit_str(char const *s, const char const *cstr);
     default: ft_strsplit_char \
     )(s,X)
 
+extern void ft_print_strsplit(char *** const s);
 extern void ft_free_strsplit(char *** const s);
 
 extern void ft_putchar(char c);

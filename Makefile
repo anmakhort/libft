@@ -99,7 +99,9 @@ SOURCES = \
 		./src/ft_strfind_char.c \
 		./src/ft_strfind_str.c \
 		./src/ft_strsplit_char.c \
-		./src/ft_free_strsplit.c
+		./src/ft_strsplit_str.c \
+		./src/ft_free_strsplit.c \
+		./src/ft_print_strsplit.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

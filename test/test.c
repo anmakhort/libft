@@ -856,28 +856,18 @@ TEST_CASE(ft_strfind_str_test) {
 	TEST_EQUAL("[ret]ft_strfind_str's n_conseq == correct", qq_count, 3)
 }
 
-TEST_CASE(ft_strsplit_char_test) {
-	AUTO_TESTCASE_INIT
-
-	char **splitted = ft_strsplit("**salut*les***etudiants*", '*');
-
-	printf("%d\n", splitted == NULL);
-
-	char **ptr = splitted;
-	while (ptr && *ptr) {
-		printf("%s\n", *(ptr++));
-	}
-
-	ft_free_strsplit(&splitted);
-}
-
-/*
 TEST_CASE(ft_strsplit_test) {
 	AUTO_TESTCASE_INIT
 
 	char **splitted = ft_strsplit("**salut*les***etudiants*", '*');
 	char **splitted2 = ft_strsplit("*salut**les**etudiants*", "*");
 	char **splitted3 = ft_strsplit("**salut**les**etudiants**", "**");
+
+	ft_print_strsplit(&splitted);
+	ft_putchar('\n');
+	ft_print_strsplit(&splitted2);
+	ft_putchar('\n');
+	ft_print_strsplit(&splitted3);
 
 	TEST_STRINGS_DEEP_EQUAL("ft_strsplit by single char", splitted, splitted2)
 	TEST_STRINGS_DEEP_EQUAL("ft_strsplit by string", splitted2, splitted3)
@@ -886,7 +876,7 @@ TEST_CASE(ft_strsplit_test) {
 	ft_free_strsplit(&splitted2);
 	ft_free_strsplit(&splitted3);
 }
-*/
+
 
 SELECTED_TEST_CASES {
 	SELECT(ft_memset_test)
@@ -935,8 +925,7 @@ SELECTED_TEST_CASES {
 	SELECT(ft_getnextline_test)
 	SELECT(ft_strfind_char_test)
 	SELECT(ft_strfind_str_test)
-	SELECT(ft_strsplit_char_test)
-	//SELECT(ft_strsplit_test)
+	SELECT(ft_strsplit_test)
 }
 
 PERFORM_TESTS
