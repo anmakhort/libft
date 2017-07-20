@@ -5,6 +5,13 @@
 #include <ctype.h>
 #include <string.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <unistd.h>
+
 
 TEST_CASE(ft_memset_test) {
 	AUTO_TESTCASE_INIT
@@ -740,6 +747,81 @@ TEST_CASE(ft_strtrim_test) {
 	ft_strdel(&ft_res3);
 }
 
+TEST_CASE(ft_readAll_test) {
+	AUTO_TESTCASE_INIT
+
+	const char *path = "test_file.dat";
+	int fd = open(path, O_RDONLY, S_IRWXU);
+	if (fd != -1) {
+		char *str = ft_readAll(fd);
+		if (str) {
+			printf("READ: %s\n", str);
+			free(str);
+		} else {
+			printf("NULL str was returned!\n");
+		}
+		close(fd);
+	} else {
+		perror("Can't open file!");
+	}
+}
+
+TEST_CASE(ft_getnextline_test) {
+	AUTO_TESTCASE_INIT
+
+	int fd1 = open("test_file.dat", O_RDONLY, S_IRWXU);
+	int fd2 = open("test_file2.dat", O_RDONLY, S_IRWXU);
+	
+	char *str = NULL;
+
+	if (fd1 != -1 && fd2 != -1) {
+		if ((str = ft_getnextline(fd1)) != NULL) printf("File1: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd2)) != NULL) printf("File2: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd1)) != NULL) printf("File1: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd2)) != NULL) printf("File2: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd1)) != NULL) printf("File1: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd2)) != NULL) printf("File2: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd1)) != NULL) printf("File1: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd2)) != NULL) printf("File2: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd1)) != NULL) printf("File1: %s\n", str);
+		free(str);
+
+		if ((str = ft_getnextline(fd2)) != NULL) printf("File2: %s\n", str);
+		free(str);
+	} else {
+		perror("Can't open files!");
+	}
+
+	ft_free_getnextline();
+	
+	// Test for multiple free's :
+	ft_free_getnextline();
+	ft_free_getnextline();
+	ft_free_getnextline();
+	ft_free_getnextline();
+	ft_free_getnextline();
+	ft_free_getnextline();
+
+	close(fd1);
+	close(fd2);
+}
+
 /*
 TEST_CASE(ft_strsplit_test) {
 	AUTO_TESTCASE_INIT
@@ -800,6 +882,8 @@ SELECTED_TEST_CASES {
 	SELECT(ft_strsub_test)
 	SELECT(ft_strjoin_test)
 	SELECT(ft_strtrim_test)
+	SELECT(ft_readAll_test)
+	SELECT(ft_getnextline_test)
 	//SELECT(ft_strsplit_test)
 }
 

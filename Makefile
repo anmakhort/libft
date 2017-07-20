@@ -7,7 +7,7 @@ CC = gcc
 STANDART = -std=c99
 CFLAGS = -Wall -Wextra -Werror -O3 -pipe
 DEBUG =
-INCLUDES = -I/usr/include -I/usr/include/linux -I/libft/
+INCLUDES = -I/usr/include -I/usr/include/linux -I/libft/list.h -I/libft/libft.h
 LDFLAGS =
 LIBS =
 
@@ -24,7 +24,16 @@ TEST_TARGET = ./test/test
 TEST_SOURCES = ./test/test.c
 TEST_OBJECTS = $(TEST_SOURCES:.c=.o)
 
-SOURCES =	./src/ft_sign.c \
+SOURCES = \
+		./src/ft_lstdelone.c \
+		./src/ft_lstadd.c \
+		./src/ft_lstdel.c \
+		./src/ft_lstiter.c \
+		./src/ft_lstmap.c \
+		./src/ft_lstnew.c \
+		./src/ft_lstpush_front.c \
+		./src/ft_lstpush_back.c \
+		./src/ft_sign.c \
 		./src/ft_bzero.c \
 		./src/ft_memalloc.c \
 		./src/ft_memblockcpy.c \
@@ -84,7 +93,9 @@ SOURCES =	./src/ft_sign.c \
 		./src/ft_strnequ.c \
 		./src/ft_strsub.c \
 		./src/ft_strjoin.c \
-		./src/ft_strtrim.c
+		./src/ft_strtrim.c \
+		./src/ft_readAll.c \
+		./src/ft_getnextline.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
