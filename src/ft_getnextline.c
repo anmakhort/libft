@@ -78,36 +78,30 @@ ssize_t _read(t_list **head, const int fd) {
 char *_find(t_list **head, const char c, const int fd) {
 	if (!head) return NULL;
 	t_list *ptr = *head;
-	char *sub = NULL;
 	while (ptr) {
 		if (!ptr->content) return NULL;
 		if (((content_t*)(ptr->content))->fd == fd) break;
 		ptr = ptr->next;
 	}
 	if (!(((content_t*)(ptr->content)))->buff_size) return NULL;
-	size_t n = 0;
-	char *ptr_str = (((content_t*)(ptr->content)))->buff;
-	while (*ptr_str) {
-		if (*ptr_str == c) break;
-		n++;
-		ptr_str++;
+	// try to read while '\n' not found:
+	char *buff_ptr = (((content_t*)(ptr->content)))->buff;
+	char *ptr_found = NULL;
+	size_t offset = 0;
+	while ((ptr_found = ft_strchr(buff_ptr+offset, c)) == NULL) {
+		ssize_t n_read = _read(head, fd);
+		if (n_read <= 0) break;
+		offset += n_read;
+		// update the poiter as it was reallocated by _read(...)
+		// function -> its address might change after
+		// the call of _read(...) :
+		buff_ptr = (((content_t*)(ptr->content)))->buff;
 	}
-	if (*ptr_str || n == (((content_t*)(ptr->content)))->buff_size) {
-		size_t offset = 0;
-		while (ft_strchr((((content_t*)(ptr->content)))->buff+offset, c) == NULL) {
-			ssize_t read = _read(head, fd);
-			if (read <= 0) break;
-			offset += read;
-		}
-		n = 0;
-		ptr_str = (((content_t*)(ptr->content)))->buff;
-		while (*ptr_str) {
-			if (*ptr_str == c) break;
-			n++;
-			ptr_str++;
-		}
-	}
-	sub = ft_strsub((((content_t*)(ptr->content)))->buff, 0, n);
+	size_t n = (!ptr_found) ? 0 : (size_t)(ptr_found - buff_ptr);
+	// for this moment we have the index of first '\n' char
+	// or n = 0 if it wasn't found (even if we reached EOF)
+	// strsub with zero size will return NULL:
+	char *sub = ft_strsub((((content_t*)(ptr->content)))->buff, 0, n);
 	if (sub) {
 		char *tmp = ft_strsub(((content_t*)(ptr->content))->buff, \
 			n+1, ((content_t*)(ptr->content))->buff_size-n-1);
