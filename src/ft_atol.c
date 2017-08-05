@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 long ft_atol(const char *nptr) {
 	if (!nptr) return ~0L;

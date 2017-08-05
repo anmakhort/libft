@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 char *ft_readline(int fd, size_t buff_size) {
 	char *buff = (char *)malloc(buff_size);

@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 #ifdef BUFF_SIZE
 	#if BUFF_SIZE < 1 || BUFF_SIZE > 4096

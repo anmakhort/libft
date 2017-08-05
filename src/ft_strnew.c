@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 char *ft_strnew(size_t size) {
 	if (!size) return NULL;

@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 void ft_lstpush_back(t_list **alst, t_list *new) {
 	if (!alst || !new) return;

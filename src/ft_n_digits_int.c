@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 size_t ft_n_digits_int(int number) {
 	if (number == 0) return 1;

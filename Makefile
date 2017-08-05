@@ -7,7 +7,7 @@ CC = gcc
 STANDART = -std=c99
 CFLAGS = -Wall -Wextra -Werror -O3 -pipe
 DEBUG =
-INCLUDES = -I/usr/include -I/usr/include/linux -I/libft/list.h -I/libft/libft.h
+INCLUDES = -I/usr/include -I/usr/include/linux -I/include
 LDFLAGS =
 LIBS =
 

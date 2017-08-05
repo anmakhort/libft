@@ -1,7 +1,7 @@
 #define USE_TESTCASE_COUNTER
 #include "unittest.h"
 
-#include "../src/libft.h"
+#include "../include/libft.h"
 #include <ctype.h>
 #include <string.h>
 

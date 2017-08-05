@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 void *ft_memblockcpy(void *dest, const void * const begin, const void * const end) {
 	if (!dest || !begin || !end) return NULL;

@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 void ft_putstr(char const *s) {
 	if (s) {

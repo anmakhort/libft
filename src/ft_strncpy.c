@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 char *ft_strncpy(char *dest, const char *src, size_t n) {
 	if (!src || !dest) return NULL;

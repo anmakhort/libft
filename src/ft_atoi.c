@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 int ft_atoi(const char *nptr) {
 	if (!nptr) return ~0;

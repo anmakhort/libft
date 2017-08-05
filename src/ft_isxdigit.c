@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 int ft_isxdigit(int c) {
 	return (ft_isdigit(c) || \

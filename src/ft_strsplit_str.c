@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 char **ft_strsplit_str(char const *s, const char const *cstr) {
 	if (!s || !cstr) return NULL;

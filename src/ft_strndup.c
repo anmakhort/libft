@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 char *ft_strndup(const char *s, size_t n) {
 	if (!s) return NULL;

@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 char *ft_ltoa(long number) {
 	size_t n_digits = ft_n_digits_long(number);

@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 char *ft_strfind_str(const char const *s, const char const *cstr, size_t *n_conseq) {
 	if (!s || !cstr) return NULL;

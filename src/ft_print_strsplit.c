@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../include/libft.h"
 
 void ft_print_strsplit(char *** const s) {
 	char **ptr = (char **)(*s);
