@@ -107,7 +107,7 @@ OBJECTS = $(SOURCES:.c=.o)
 
 RM = rm -fr
 
-.PHONY: all, run, memtest, fulltest, distclean, objclean, clean
+.PHONY: all, memtest, fulltest, distclean, objclean, clean
 
 all: newline $(TARGET_STATIC_LIB) $(TARGET_SHARED_LIB) $(TEST_TARGET)
 
@@ -134,9 +134,6 @@ $(TEST_TARGET): $(TEST_OBJECTS) $(TARGET_STATIC_LIB)
 $(TEST_OBJECTS):
 	@$(CC) $(TEST_STANDART) $(CFLAGS) $(TEST_DEBUG) -c $(TEST_SOURCES) -o $(TEST_OBJECTS)
 	@echo "\033[35m  ✔ \033[0m\033[1;33m" $(TEST_SOURCES) "\033[0m->\033[1;36m" $(TEST_OBJECTS) "\033[0m"
-
-run: $(TEST_TARGET) newline
-	@./$(TEST_TARGET)
 
 memtest: all
 	@G_SLICE=always-malloc G_DEBUG=gc-friendly \
