@@ -822,8 +822,8 @@ TEST_CASE(ft_getnextline_test) {
 	ft_free_getnextline();
 	ft_free_getnextline();
 
-	close(fd1);
-	close(fd2);
+	if (fd1 > 0) close(fd1);
+	if (fd2 > 0) close(fd2);
 
 	TEST_EQUAL("passed if free_resources is ok", 1, 1)
 }
